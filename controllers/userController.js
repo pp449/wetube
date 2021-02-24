@@ -1,7 +1,31 @@
-export const join = (req, res) => res.send("Join");
-export const login = (req, res) => res.send("Login");
-export const logout = (req, res) => res.send("Logout");
-export const users = (req, res) => res.send("users");
-export const userDetail = (req, res) => res.send("userDetail");
-export const editProfile = (req, res) => res.send("editProfile");
-export const changePassword = (req, res) => res.send("changePassword");
+import routes from "../routes";
+
+export const getJoin = (req, res) => {
+    res.render("join", {pageTitle: "join"});
+};
+
+export const postJoin = (req, res) =>{
+    const{
+        body: {name, email, password, password2}
+    } = req;
+    if(password !== password2){
+        res.status(400);
+        res.render("join", {pageTitle: "join"});
+    } else{
+        // To Do: Register User
+        // To Do: Log user
+        res.redirect(routes.home);
+    }
+};
+
+export const getLogin = (req, res) => res.render("Login", { pageTitle: "Log In"});
+export const postLogin = (req,res) => {
+    res.redirect(routes.home);
+}
+export const logout = (req, res) => {
+    // To Do: Process Log Out
+    res.redirect(routes.home);
+}
+export const userDetail = (req, res) => res.render("userDetail");
+export const editProfile = (req, res) => res.render("editProfile");
+export const changePassword = (req, res) => res.render("changePassword");
