@@ -9,6 +9,8 @@ import {
   githubLogin,
   postGithubLogIn,
   getMe,
+  postKakaoLogIn,
+  kakaoLogin,
 } from "../controllers/userController";
 import { onlyPrivate, onlyPublic } from "../middlewares";
 import { home, search } from "../controllers/videoController";
@@ -30,6 +32,14 @@ globalRouter.get(
   routes.githubCallback,
   passport.authenticate("github", { failureRedirect: "/login" }),
   postGithubLogIn
+);
+
+globalRouter.get(routes.kakao, kakaoLogin);
+
+globalRouter.get(
+  routes.kakaoCallback,
+  passport.authenticate("kakao", { failureRedirect: "/login" }),
+  postKakaoLogIn
 );
 
 globalRouter.get(routes.me, getMe);
